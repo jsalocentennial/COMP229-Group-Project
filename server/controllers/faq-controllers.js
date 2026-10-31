@@ -3,3 +3,4 @@ function faqController(req, res) {
 }   
 
 export default faqController;
+
