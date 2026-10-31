@@ -6,6 +6,7 @@ import leaderboardRoutes from './routes/leader-board-routes.js';
 import gameGuideRoutes from './routes/game-guide-routes.js';
 import faqRoutes from './routes/faq-routes.js';
 import challengeRoutes from './routes/challenge-creater-routes.js';
+import userRoutes from './routes/user-routes.js';
 
 //Database Connection
 mongoose.connect("mongodb://localhost:27017/group-project");
@@ -25,7 +26,7 @@ app.use('/leader-board', leaderboardRoutes);
 app.use('/game-guide', gameGuideRoutes);
 app.use('/faq',faqRoutes);
 app.use('/challenge-creater', challengeRoutes);
-
+app.use('/user', userRoutes);
 app.listen(3000);
 
 console.log('Server is running on http://localhost:3000');
