@@ -1,4 +1,8 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
+
+import authorizationMiddleware from './middlewares/auth.js';
 
 import express from 'express';
 import homeRoutes from './routes/home-routes.js';
@@ -9,7 +13,8 @@ import challengeRoutes from './routes/challenge-creater-routes.js';
 import userRoutes from './routes/user-routes.js';
 
 //Database Connection
-mongoose.connect("mongodb://localhost:27017/group-project");
+mongoose.connect(process.env.MONGO_URI, {
+});
 const connecton = mongoose.connection;
 connecton.on("error", console.error.bind(console, "connection error:"));         //Error Check
 connecton.once("open", () => {
@@ -25,7 +30,7 @@ app.use('/', homeRoutes);
 app.use('/leader-board', leaderboardRoutes);
 app.use('/game-guide', gameGuideRoutes);
 app.use('/faq',faqRoutes);
-app.use('/challenge-creater', challengeRoutes);
+app.use('/challenge-creater', authorizationMiddleware, challengeRoutes);
 app.use('/user', userRoutes);
 app.listen(3000);
 
