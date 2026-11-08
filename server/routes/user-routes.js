@@ -1,5 +1,3 @@
-
-
 import express from 'express';
 import { createUser, getAllUsers, getUserById, deleteUser, updateUser, logInUser,  } from '../controllers/user-controller.js';
 import authorizationMiddleware from '../middlewares/auth.js';

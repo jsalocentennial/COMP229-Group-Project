@@ -24,11 +24,21 @@ export const getUserById = async (req, res) => {
 
 export const createUser = async (req, res) => {
     try {
-        const newUser = new userModel(req.body);
+        const { username, email, password } = req.body;                           //Only accept name, email, and password from the request body
+        const newUser = new userModel({ username, email, password });
         const savedUser = await newUser.save();
 
-        const token = generateToken(savedUser); // Generate JWT token for the new user
-        res.status(201).json({ user: savedUser, token });
+        const token = generateToken(savedUser);                               // Generate a JWT token for the newly created user (Oct 14th class)
+
+        const safeUser = {                                                    //Create a variable to hold the user data without the password
+            _id: savedUser._id,
+            username: savedUser.name,
+            email: savedUser.email,
+            role: savedUser.role,                                             //Include the role in the safe user object
+            created: savedUser.created,
+            updated: savedUser.updated
+        }
+        res.status(201).json( { username: safeUser, token: token } );             //Call the safe variable and token
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
