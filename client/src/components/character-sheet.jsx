@@ -1,7 +1,9 @@
+import '../style/challenge-creator.css';
+
 const CharacterSheet = () => {
     return (
         <div>
-            <h2>Character Sheet</h2>
+            <h2>Creatures and Humans</h2>
         </div>
     );
 };
