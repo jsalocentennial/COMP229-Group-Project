@@ -7,11 +7,13 @@
 "subclassID":"",
 "raceID":"",
 "backgroundID":"",
-
-"name": "",
+"characterName": "",
 "level": 0,
 "alignment":"",
 "experiencePoints": 0,
+
+
+
 "inspirationPoints":0,
 "proficiencyBonus":0,
 "armorClass":0,

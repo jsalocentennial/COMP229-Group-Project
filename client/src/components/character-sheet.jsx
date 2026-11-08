@@ -1,4 +1,3 @@
-import '../style/challenge-creator.css';
 
 const CharacterSheet = () => {
     return (

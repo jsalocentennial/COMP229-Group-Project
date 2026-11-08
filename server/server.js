@@ -11,6 +11,7 @@ import gameGuideRoutes from './routes/game-guide-routes.js';
 import faqRoutes from './routes/faq-routes.js';
 import challengeRoutes from './routes/challenge-creater-routes.js';
 import userRoutes from './routes/user-routes.js';
+import characterSheetRoutes from './routes/character-sheet-routes.js';
 
 //Database Connection
 mongoose.connect(process.env.MONGO_URI, {
@@ -32,6 +33,7 @@ app.use('/game-guide', gameGuideRoutes);
 app.use('/faq',faqRoutes);
 app.use('/challenge-creater', authorizationMiddleware, challengeRoutes);
 app.use('/user', userRoutes);
+app.use('/characterSheet', characterSheetRoutes);
 app.listen(3000);
 
 console.log('Server is running on http://localhost:3000');
