@@ -1,0 +1,44 @@
+{
+    "items": [
+        {
+            "itemId": "abacus",
+            "name": "Abacus",
+            "category": "Common Item",
+            "weight": 2,
+            "value": {
+                "gp": 2
+            },
+            "description": "A simple counting tool used for arithmetic calculations. It consists of a frame with rods or wires, each containing beads that can be moved to represent numbers. The abacus is often used in educational settings and by merchants for quick calculations."
+        },
+        {
+            "itemId": "bedroll",
+            "name": "Bedroll",
+            "category": "Common Item",
+            "weight": 7,
+            "value": {
+                "gp": 1
+            },
+            "description": "A portable bed for sleeping, typically made of canvas or other lightweight materials. It is often used by travelers and campers for a comfortable night's rest. The bedroll is easy to carry and can be quickly set up in the field."
+        },
+        {
+            "itemId": "bell",
+            "name": "Bell",
+            "category": "Common Item",
+            "weight": 0,
+            "value": {
+                "gp": 1
+            },
+            "description": ""
+        },
+        {
+            "itemId": "blanket",
+            "name": "Blanket",
+            "category": "Common Item",
+            "weight": 3,
+            "value": {
+                "sp": 5
+            },
+            "description": ""
+        }
+    ]
+}
