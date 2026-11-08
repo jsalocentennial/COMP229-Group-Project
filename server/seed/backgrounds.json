@@ -1,0 +1,90 @@
+
+[
+    {
+        "id": "acolyte",
+        "description": "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine. You are not necessarily a cleric – performing sacred rites is not the same thing as channeling divine power.",
+        "skillProficiencies": [
+            "insight",
+            "religion"
+        ],
+        "toolProficiencies": [],
+        "languages": [
+            "two_of_your_choice"
+        ],
+        "equipment": [
+            {
+                "itemID": "a_prayer_book_or_prayer_wheel",
+                "amount": 1
+            },
+            {
+                "itemID": "sticks_of_incense",
+                "amount": 5
+            },
+            {
+                "itemID": "vestments",
+                "amount": 1
+            },
+            {
+                "itemID": "a_set_of_common_clothes",
+                "amount": 1
+            },
+            {
+                "itemID": "a_pouch",
+                "amount": 1
+            }
+        ],
+        "featuresAndTraits": [
+            {
+                "featureID": "shelter_of_the_faithful"
+            }
+        ]
+    },
+    {
+        "id": "anthropologist",
+        "description": "You have always been fascinated by other cultures, from the most ancient and primeval lost lands to the most modern civilizations. By studying other cultures' customs, philosophies, laws, rituals, religious beliefs, languages, and art, you have learned how tribes, empires, and all forms of society in between craft their own destinies and doom. This knowledge came to you not only through books and scrolls, but also through firsthand observation – by visiting far-flung settlements and exploring local histories and customs.",
+        "skillProficiencies": [
+            "insight",
+            "religion"
+        ],
+        "toolProficiencies": [],
+        "languages": [
+            "two_of_your_choice"
+        ],
+        "equipment": [
+            {
+                "itemID": "a_leather_bound_diary",
+                "amount": 1
+            },
+            {
+                "itemID": "a_bottle_of_ink",
+                "amount": 1
+            },
+            {
+                "itemID": "an_ink_pen",
+                "amount": 1
+            },
+            {
+                "itemID": "a_set_of_traveler_s_clothes",
+                "amount": 1
+            },
+            {
+                "itemID": "one_trinket_of_special_significance",
+                "amount": 1
+            },
+            {
+                "itemID": "a_pouch",
+                "amount": 1
+            }
+        ],
+        "featuresAndTraits": [
+            {
+                "featureID": "cultural_chameleon"
+            },
+            {
+                "featureID": "adept_linguist"
+            }
+        ]
+    }
+   
+    
+]
