@@ -1,7 +1,9 @@
+import "../style/layout.css"
+
 const FAQ = () => {
     return (
         <div>
-            <h2>FAQ</h2>
+            <h2 className="layout-title">FAQ</h2>
         </div>
     );
 };

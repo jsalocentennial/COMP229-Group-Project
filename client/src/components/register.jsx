@@ -35,12 +35,12 @@ const Register = ({ onAuth }) => {
 
     return (
         <div className="register-container">
-            <h1>Register</h1>
+            <h1 className="layout-title">Register</h1>
 
             <form onSubmit={handleSubmit}>
 
                 <div className="form-group">
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="username" className="layout-title">Username</label>
                     <input
                         type="text"
                         id="username"
@@ -52,7 +52,7 @@ const Register = ({ onAuth }) => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email" className="layout-title">Email</label>
                     <input
                         type="email"
                         id="email"
@@ -64,7 +64,7 @@ const Register = ({ onAuth }) => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password" className="layout-title">Password</label>
                     <input
                         type="password"
                         id="password"
