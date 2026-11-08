@@ -21,6 +21,11 @@
     text-decoration: underline;
 }
 
+:root {
+  /* You can change the background variables if your template uses them */
+  background-color: #242424; 
+}
+
 .layout-title {
     color: #fefefe;
     text-shadow: 0 0 8px #6bff95, 0 0 15px #fffa6b;
