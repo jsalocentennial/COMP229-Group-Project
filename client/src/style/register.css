@@ -1,0 +1,87 @@
+
+/* Registration container */
+.register-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #6bff95;
+    color: #fefefe;
+}
+
+/* Heading */
+.register-container h1 {
+    text-align: center;
+    color: #fefefe;
+    text-shadow: 0 0 8px #6bff95, 0 0 15px #fffa6b;
+    margin-bottom: 25px;
+}
+
+/* Form groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+/* Labels */
+.form-group label {
+    margin-bottom: 8px;
+    color: #fefefe;
+    font-weight: bold;
+}
+
+/* Input fields */
+.form-group input {
+    padding: 11px;
+    border: 1px solid #6bff95;
+    border-radius: 5px;
+    background-color: #0a0a0af5;
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+/* Input focus */
+.form-group input:focus {
+    border-color: #fffa6b;
+    box-shadow: 0 0 8px #6bff95;
+}
+
+/* Register button */
+.register-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #6bff95;
+    color: #0a0a0a;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Button hover */
+.register-container button:hover {
+    background-color: #fffa6b;
+    box-shadow: 0 0 10px #fffa6b;
+}
+
+/* Disabled button */
+.register-container button:disabled {
+    background-color: #777;
+    color: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Error message */
+.error-message {
+    color: #ff6b6b;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 15px;
+}

@@ -1,3 +1,4 @@
+import '../style/faq.css';
 const FAQ = () => {
     return (
         <div>
