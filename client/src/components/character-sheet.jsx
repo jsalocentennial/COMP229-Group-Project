@@ -13,12 +13,43 @@ import elfIcon from '../assets/elf.png';
 import orcIcon from '../assets/orc.png';
 import humanIcon from '../assets/human.png';
 
-const CharacterSheet = () => {
+const CharacterSheet = ({ token }) => {
   const canvasConfig = { width: 600, height: 300 };
   const [activeCharacters, setActiveCharacters] = useState([]);
   const [raceIconUrl, setRaceIconUrl] = useState(null);
   const [characterStats, setCharacterStats] = useState({});
+  const [savedCharacters, setSavedCharacters] = useState([]);            // State to hold saved characters from backend
+  const [editingCharacter, setEditingCharacter] = useState(null);        // State to hold the character being edited
 
+
+  // Fetching all characters saved by the logged-in user from the backend
+  useEffect(() => {                                                      
+    const getCharacters = async () => {                                 
+        try {
+            const response = await fetch('/api/characterSheet/getAllCharacters', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Failed to retrieve characters');
+            }
+
+            setSavedCharacters(data);
+            console.log('Saved characters:', data);
+
+        } catch (error) {
+            console.error('Error retrieving characters:', error);
+        }
+    };
+
+    getCharacters();
+}, [token]);
+  
+  
   // My sprite definitions with original frame dimensions
   const spriteDefinitions = {
     Thief: { src: thiefSprite, width: 40, height: 71, x: 275, y: 220  },
@@ -94,32 +125,141 @@ const CharacterSheet = () => {
   }, []);
 
   // Handling my form submission to save character data
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const characterData = Object.fromEntries(formData.entries());
+    const method = editingCharacter ? 'PUT' : 'POST';                          // Use PUT for editing, POST for new character
+    const url = editingCharacter ? `/api/characterSheet/${editingCharacter._id}` : '/api/characterSheet';
+
+    try {
+      const response = await fetch(url, {                                      //Uses post or put depending on if editing or creating new character 
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(characterData)
+      });
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Failed to save character');
+      console.log('Character saved:', data);
+
+      localStorage.setItem('characterData', JSON.stringify(data)); //Save character locally so animations work
+      window.location.reload();                                             // Refreshing page so canvas can load new character state
+
+    } catch (error) {
+      console.error('Error saving character:', error);
+    }
+    //Commented Out for backend integration//
+    // // Saving my form values to local storage before refresh
+    // localStorage.setItem('characterData', JSON.stringify(characterData));            
     
-    // Saving my form values to local storage before refresh
-    localStorage.setItem('characterData', JSON.stringify(characterData));
-    
-    // Refreshing page so canvas can load new character state
+    // // Refreshing page so canvas can load new character state
+    // window.location.reload();
+  };
+
+  //Used to handle selecting a character from the saved list, selected character will be displayed on canvas
+  const handleSelectCharacter = (character) => {
+    localStorage.setItem('characterData', JSON.stringify(character));
     window.location.reload();
   };
+
+  // Function to handle editing a character from the saved list
+  const handleEditCharacter = (character) => {                                         
+    setEditingCharacter(character);
+    console.log('Editing character:', character);
+};
+
+// Function to handle deleting a character from the saved list
+  const handleDeleteCharacter = async (character) => {
+      const confirmDelete = window.confirm(
+          `Are you sure you want to delete ${character.name}?`
+      );
+      if (!confirmDelete) {
+          return;
+      }
+      try {
+          const response = await fetch(`/api/characterSheet/${character._id}`, {
+              method: 'DELETE',
+              headers: {
+                  'Authorization': `Bearer ${token}`
+              }
+          });
+          const data = await response.json();
+          if (!response.ok) {
+              throw new Error(data.message || 'Failed to delete character');
+          }
+          console.log('Character deleted:', data);
+          // Remove the deleted character from local storage if it's the currently previewed character  
+          const previewCharacter = JSON.parse(localStorage.getItem('characterData') || 'null');
+          if (previewCharacter?._id === character._id) {
+    localStorage.removeItem('characterData');
+}
+
+window.location.reload();
+      } catch (error) {
+          console.error('Error deleting character:', error);
+      }
+    };
 
   return (
     <div>
       <h2 className="layout-title">Creatures vs Humans</h2>
+
+      {/* Display characters saved by the logged-in user */}
+      <div className="saved-characters">
+        <h3 className="layout-title">My Characters</h3>
+
+        {savedCharacters.length === 0 ? (
+          <p>You haven't created any characters yet.</p>
+        ) : (
+          <ul>
+            {savedCharacters.map((character) => (
+              <li key={character._id}>
+                <strong>{character.name}</strong>
+                {' — '}
+                {character.race} {character.class}
+                {' — '}
+                Level {character.level}
+                <button
+                  type="button"
+                  onClick={() => handleSelectCharacter(character)}> View
+              </button>
+              <button
+                type="button"
+                onClick={() => handleEditCharacter(character)}> Edit
+              </button>
+              <button
+                type="button"
+                onClick={() => handleDeleteCharacter(character)}> Delete
+              </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
       
       {/* My character creation form */}
-      <form className="character-form" onSubmit={handleSubmit}>
+      <form
+        key={editingCharacter?._id || 'new'}
+        className="character-form" 
+        onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
-          <input type="text" id="name" name="name" required placeholder="Enter character name" />
+          <input 
+            type="text" 
+            id="name"
+            name="name" 
+            required 
+            placeholder="Enter character name" 
+            defaultValue={editingCharacter?.name || ''}/>
         </div>
 
         <div className="form-group">
           <label htmlFor="class">Class</label>
-          <select id="class" name="class" required defaultValue="">
+          <select id="class" name="class" required defaultValue={editingCharacter?.class || ''}>
             <option value="" disabled>Select Class</option>
             <option value="Fighter">Fighter</option>
             <option value="Mage">Mage</option>
@@ -129,7 +269,7 @@ const CharacterSheet = () => {
 
         <div className="form-group">
           <label htmlFor="race">Race</label>
-          <select id="race" name="race" required defaultValue="">
+          <select id="race" name="race" required defaultValue={editingCharacter?.race || ''}>
             <option value="" disabled>Select Race</option>
             <option value="Human">Human</option>
             <option value="Elf">Elf</option>
@@ -139,15 +279,16 @@ const CharacterSheet = () => {
 
         <div className="form-group">
           <label htmlFor="experience">Experience</label>
-          <input type="number" id="experience" name="experience" min="0" max="1000" defaultValue="0" />
+          <input type="number" id="experience" name="experience" min="0" max="1000" defaultValue={editingCharacter?.experience || '0'} />
         </div>
 
         <div className="form-group">
           <label htmlFor="level">Level</label>
-          <input type="number" id="level" name="level" min="1" max="100" defaultValue="1" />
+          <input type="number" id="level" name="level" min="1" max="100" defaultValue={editingCharacter?.level || '1'} />
         </div>
 
-        <button type="submit" className="submit-btn">Create Character & Preview</button>
+        <button type="submit" className="submit-btn"> {editingCharacter ? 'Save Changes' : 'Create character and Preview'}
+        </button>
       </form>
 
       <div className="character-preview-container">

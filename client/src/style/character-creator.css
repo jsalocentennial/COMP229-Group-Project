@@ -9,3 +9,39 @@
     border: 2px solid #333;
     border-radius: 4px;
 }
+
+.saved-characters {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 5px;
+}
+
+.saved-characters ul {
+    list-style: none;
+    padding: 0;
+}
+
+.saved-characters li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #242424;
+    color: white;
+}
+
+.saved-characters button {
+    background-color: #00bfff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.saved-characters button:hover {
+    background-color: #6bff95;
+    color: #242424;
+}
