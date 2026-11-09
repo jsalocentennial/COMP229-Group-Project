@@ -1,42 +1,45 @@
-import { useCallback, useState } from 'react';
-import { Link, Navigate, Route, Routes } from 'react-router-dom';
-import Layout from './components/layout';
-import Home from './components/home';
-import LeaderBoard from './components/leader-board';
-import GameGuide from './components/game-guide';
-import CharacterSheet from './components/character-sheet';
-import FAQ from './components/faq';
-import Register from './components/register';
-import Login from './components/login';
+import { useCallback, useState } from "react";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import Layout from "./components/layout";
+import Home from "./components/home";
+import LeaderBoard from "./components/leader-board";
+import GameGuide from "./components/game-guide";
+import CharacterSheet from "./components/character-sheet";
+import FAQ from "./components/faq";
+import Register from "./components/register";
+import Login from "./components/login";
 
 const MainRouter = () => {
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
+  const navigate = useNavigate();
 
-    const [token, setToken] = useState(localStorage.getItem('token') || null);    //Nov, 4th class, saves token to local storage, if it exists, otherwise null
+  const onAuth = useCallback((value) => {
+    localStorage.removeItem("characterData");
 
-    const onAuth = useCallback((value) => {
-        localStorage.removeItem('characterData');
+    if (value) localStorage.setItem("token", value);
+    else localStorage.removeItem("token");
+    setToken(value);
+  }, []);
 
-        if (value) localStorage.setItem('token', value);
-        else localStorage.removeItem('token');
+  const handleSignOut = useCallback(() => {
+    onAuth(null);
+    navigate("/");
+  }, [navigate, onAuth]);
 
-        setToken(value);
-        }, []);
-
-    return (                                                                              //Added token check to character sheet route, no token, no character sheet
+  return (
     <div>
-        <Layout />
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/leader-board" element={<LeaderBoard />} />
-            <Route path="/game-guide" element={<GameGuide />} />
-            <Route path="/character-sheet" element={token ? <CharacterSheet token={token} /> : <Navigate to="/login"/>} />   
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/register" element={token ? <Navigate to="/" /> : <Register onAuth={onAuth} />} />
-            <Route path="/login" element={token ? <Navigate to="/" /> : <Login onAuth={onAuth} />} />
-
-        </Routes>
+      <Layout token={token} onSignOut={handleSignOut} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/leader-board" element={<LeaderBoard />} />
+        <Route path="/game-guide" element={<GameGuide />} />
+        <Route path="/character-sheet" element={token ? <CharacterSheet token={token} /> : <Navigate to="/login" />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/register" element={token ? <Navigate to="/" /> : <Register onAuth={onAuth} />} />
+        <Route path="/login" element={token ? <Navigate to="/" /> : <Login onAuth={onAuth} />} />
+      </Routes>
     </div>
-    );
-}
-    
+  );
+};
+
 export default MainRouter;
