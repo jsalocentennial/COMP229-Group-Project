@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import Layout from "./components/layout";
 import Home from "./components/home";
 import LeaderBoard from "./components/leader-board";
@@ -22,8 +22,10 @@ const MainRouter = () => {
   }, []);
 
   const handleSignOut = useCallback(() => {
+    console.log("Signing out...");
     onAuth(null);
     navigate("/");
+    window.location.reload(); 
   }, [navigate, onAuth]);
 
   return (
@@ -33,10 +35,10 @@ const MainRouter = () => {
         <Route path="/" element={<Home />} />
         <Route path="/leader-board" element={<LeaderBoard />} />
         <Route path="/game-guide" element={<GameGuide />} />
-        <Route path="/character-sheet" element={token ? <CharacterSheet token={token} /> : <Navigate to="/login" />} />
+        <Route path="/character-sheet" element={token ? (<CharacterSheet token={token} />) : (<Navigate to="/login" state={{from: "/character-sheet"}} replace />)} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/register" element={token ? <Navigate to="/" /> : <Register onAuth={onAuth} />} />
-        <Route path="/login" element={token ? <Navigate to="/" /> : <Login onAuth={onAuth} />} />
+        <Route path="/login" element= {<Login onAuth={onAuth} />} />
       </Routes>
     </div>
   );

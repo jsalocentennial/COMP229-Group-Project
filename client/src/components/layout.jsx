@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "../style/layout.css";
 
 const Layout = ({ token, onSignOut }) => {
+  const location = useLocation();
+
+
   return (
     <div className="layout">
       <h1 className="layout-title">TEAM 2 GAME SITE</h1>
@@ -14,7 +18,7 @@ const Layout = ({ token, onSignOut }) => {
           Game Guide
         </Link>{" "}
         |
-        <Link className="navbar-link" to="/Character-Sheet">
+        <Link className="navbar-link" to="/character-sheet">
           Character Sheet
         </Link>{" "}
         |
@@ -29,12 +33,13 @@ const Layout = ({ token, onSignOut }) => {
               Register
             </Link>{" "}
             |
-            <Link className="navbar-link" to="/login">
+            <Link className="navbar-link" to="/login" state={{from: location}}>
               Login
             </Link>
           </>
         ) : (
           <>
+          |
             <Link
               className="navbar-link"
               to="/logout"
@@ -42,7 +47,7 @@ const Layout = ({ token, onSignOut }) => {
                 e.preventDefault();
                 onSignOut();
               }}>
-              | Sign out
+               Sign out
             </Link>
           </>
         )}

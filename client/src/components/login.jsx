@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../style/login.css";
 
 const Login = ({ onAuth }) => {
@@ -7,6 +7,7 @@ const Login = ({ onAuth }) => {
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,7 +27,7 @@ const Login = ({ onAuth }) => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Failed to login");
       onAuth(data.token);
-      navigate("/");
+      navigate(location.state?.from || "/", { replace: true });
     } catch (error) {
       setError(error.message);
     } finally {
