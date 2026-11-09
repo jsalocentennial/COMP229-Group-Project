@@ -9,10 +9,75 @@
     border-bottom: 3px solid #6bff95;
     color: #fefefe;
 }
+
+/* Header 3 Layout title */
+h3.layout-title {
+    font-size: 28px;
+}
+
 /*Header*/
 .home-container h2 {
     font-size: 30px;
     font-weight: bold;
     color: #fefefe;
     margin: 0;
+}
+
+/* Feature list */
+.feature-list {
+    text-align: left;
+}
+
+.listheader {
+    font-weight: bold;
+    padding-bottom: 30px;
+    margin-top: 10px;
+    list-style-type: none;
+    font-size: 20px;
+}
+
+.listitem {
+    margin-left: 30px;
+    font-size: 18px;
+    list-style-type: disc;
+    padding-left: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.sublist {
+    font-size: 16px;
+    margin-left: 100px;
+    margin-top: 20px;
+    list-style-type: disc;
+    padding-left: 0;
+}
+
+.race-icon {
+    height: 75px;
+    display: block;
+    margin-left: auto;
+    margin-right: 100px;
+}
+
+.class-icon {
+    height: 75px;
+    display: block;
+    margin-left: auto;
+    margin-right: 100px;
+}
+
+.btn-primary {
+    background-color: #6bff95;
+    color: #1a1a1a;
+    border: none;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #5adf85;
 }
