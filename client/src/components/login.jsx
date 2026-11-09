@@ -25,7 +25,7 @@ const Login = ({ onAuth }) => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Failed to login");
       onAuth(data.token);
-      navigate("/projects");
+      navigate("/");
     } catch (error) {
       setError(error.message);
     } finally {

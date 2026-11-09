@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Link, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import Layout from './components/layout';
 import Home from './components/home';
 import LeaderBoard from './components/leader-board';
@@ -10,8 +10,8 @@ import Register from './components/register';
 import Login from './components/login';
 
 const MainRouter = () => {
-
-    const [token, setToken] = useState(localStorage.getItem('token') || null);    //Nov, 4th class, saves token to local storage, if it exists, otherwise null
+    const [token, setToken] = useState(localStorage.getItem('token') || null);
+    const navigate = useNavigate();
 
     const onAuth = useCallback((value) => {
         if (value) localStorage.setItem('token', value);
@@ -19,9 +19,14 @@ const MainRouter = () => {
         setToken(value);
     }, []);
 
+    const handleSignOut = useCallback(() => {
+        onAuth(null);
+        navigate('/');
+    }, [navigate, onAuth]);
+
     return (
     <div>
-        <Layout />
+        <Layout token={token} onSignOut={handleSignOut} />
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/leader-board" element={<LeaderBoard />} />
