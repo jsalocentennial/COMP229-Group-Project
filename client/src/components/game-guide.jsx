@@ -1,7 +1,7 @@
 const GameGuide = () => {
     return (
         <div>
-            <h2>Game Guide</h2>
+            <h2 className="layout-title">Game Guide</h2>
         </div>
     );
 };

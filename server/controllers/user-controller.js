@@ -24,7 +24,7 @@ export const getUserById = async (req, res) => {
 
 export const createUser = async (req, res) => {
     try {
-        const { username, email, password } = req.body;                           //Only accept name, email, and password from the request body
+        const { username, email, password } = req.body;                       //Only accept name, email, and password from the request body
         const newUser = new userModel({ username, email, password });
         const savedUser = await newUser.save();
 
@@ -38,7 +38,7 @@ export const createUser = async (req, res) => {
             created: savedUser.created,
             updated: savedUser.updated
         }
-        res.status(201).json( { username: safeUser, token: token } );             //Call the safe variable and token
+        res.status(201).json( { username: safeUser, token: token } );         //Call the safe variable and token
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -80,7 +80,16 @@ export const logInUser = async (req, res) => {                                  
             return res.status(400).json({ message: 'Invalid credentials' });
         }
         const token = generateToken(user);
-        res.status(200).json({ message: 'Login successful', user, token });                                      //Token added to login response
+        res.status(200).json({
+            message: 'Login successful',
+            user: {
+                _id: user._id,
+                username: user.username,
+                email: user.email,
+                role: user.role
+            },
+            token
+        });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

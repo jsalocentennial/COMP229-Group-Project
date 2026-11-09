@@ -1,16 +1,37 @@
 import { Link } from "react-router-dom";
+import "../style/layout.css";
 
 const Layout = ({ token, onSignOut }) => {
   return (
-    <div>
-      <h1>TEAM 2 GAME SITE</h1>
-      <nav>
-        <Link to="/">Home</Link> |<Link to="/game-guide">Game Guide</Link> |<Link to="/Character-Sheet">Character Sheet</Link> |
-        <Link to="/faq">Frequently Asked Questions</Link>
+    <div className="layout">
+      <h1 className="layout-title">TEAM 2 GAME SITE</h1>
+      <nav className="navbar">
+        <Link className="navbar-link" to="/">
+          Home
+        </Link>{" "}
+        |
+        <Link className="navbar-link" to="/game-guide">
+          Game Guide
+        </Link>{" "}
+        |
+        <Link className="navbar-link" to="/Character-Sheet">
+          Character Sheet
+        </Link>{" "}
+        |
+        <Link className="navbar-link" to="/faq">
+          Frequently Asked Questions
+        </Link>
         {!token ? (
           <>
             {" "}
-            | <Link to="/register">Register</Link> |<Link to="/login">Login</Link>
+            |{" "}
+            <Link className="navbar-link" to="/register">
+              Register
+            </Link>{" "}
+            |
+            <Link className="navbar-link" to="/login">
+              Login
+            </Link>
           </>
         ) : (
           <>
