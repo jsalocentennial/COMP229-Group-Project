@@ -35,14 +35,15 @@ const Layout = ({ token, onSignOut }) => {
           </>
         ) : (
           <>
-            <a
-              href="#logout"
+            <Link
+              className="navbar-link"
+              to="/logout"
               onClick={(e) => {
                 e.preventDefault();
                 onSignOut();
               }}>
               | Sign out
-            </a>
+            </Link>
           </>
         )}
       </nav>
