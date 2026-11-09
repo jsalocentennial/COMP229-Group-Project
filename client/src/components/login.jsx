@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../style/login.css";
 
 const Login = ({ onAuth }) => {
     const [form, setForm] = useState({ email: "", password: "" });

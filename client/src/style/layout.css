@@ -17,7 +17,7 @@
 
 /* Hover effect */
 .navbar-link:hover {
-    color: #00bfff;
+    color: #6bff95;
     text-decoration: underline;
 }
 
@@ -31,3 +31,8 @@
     text-shadow: 0 0 8px #6bff95, 0 0 15px #fffa6b;
 }
 
+body {
+    background-color: #1a1a1a;
+    margin: 0;
+    min-height: 100vh;
+}

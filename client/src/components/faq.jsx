@@ -1,4 +1,5 @@
-import "../style/layout.css"
+import '../style/layout.css';
+import '../style/faq.css';
 
 const FAQ = () => {
     return (

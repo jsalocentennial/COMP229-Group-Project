@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../style/register.css'
 
 const Register = ({ onAuth }) => {
     const [form, setForm] = useState({ username: '', email: '', password: '' })
