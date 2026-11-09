@@ -33,7 +33,7 @@ app.use('/game-guide', gameGuideRoutes);
 app.use('/faq',faqRoutes);
 app.use('/challenge-creater', authorizationMiddleware, challengeRoutes);
 app.use('/user', userRoutes);
-app.use('/characterSheet', characterSheetRoutes);
+app.use('/characterSheet', authorizationMiddleware, characterSheetRoutes);               //Middleware to prevent users without account from creating a character
 app.listen(3000);
 
 console.log('Server is running on http://localhost:3000');
