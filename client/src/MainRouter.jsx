@@ -10,7 +10,7 @@ import Register from "./components/register";
 import Login from "./components/login";
 
 const MainRouter = () => {
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
+  const [token, setToken] = useState(localStorage.getItem("token") || null);              //Initialize token from localStorage
   const navigate = useNavigate();
 
   const onAuth = useCallback((value) => {
