@@ -39,7 +39,7 @@ const Home = () => {
             </div>
             <div className="home-container">
                 <h3 className="layout-title">Getting Started:</h3>
-                <p>Need help getting started? Check out our <a href="/game-guide.jsx">Game guide</a>!</p>
+                <p>Need help getting started? Check out our <a href="/game-guide">Game guide</a>!</p>
                 <p>Or</p>
                 <p>Ready to create your own unique character? Click the button below to start your journey!</p>
                 <button className="btn-primary" onClick={handleClick}>Create Character</button>

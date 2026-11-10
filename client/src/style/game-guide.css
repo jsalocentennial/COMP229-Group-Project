@@ -1,0 +1,17 @@
+.game-guide-container {
+    text-align: center;
+    margin: 20px auto;
+    padding: 40px 20px;
+    max-width: 800px;
+    background-color: #292929;
+    border-radius: 12px;
+    border-bottom: 3px solid #6bff95;
+    color: #fefefe;
+}
+
+.game-guide-container h2 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #fefefe;
+    margin: 0;
+}
