@@ -13,7 +13,7 @@ export const getAllUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
     try {
         const user = await userModel.findById(req.params.id);
-        if (!user) {                                                                                             //Check for user
+        if (!user) {                                                                                             
             return res.status(404).json({ message: 'User not found' });
         }
         res.status(200).json(user);
@@ -47,7 +47,7 @@ export const createUser = async (req, res) => {
 export const updateUser = async (req, res) => {
     try {
         const updatedUser = await userModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!updatedUser) {                                                                                         //Check for user
+        if (!updatedUser) {                                                                                         
             return res.status(404).json({ message: 'User not found' });
         }
         res.status(200).json(updatedUser);
@@ -59,7 +59,7 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     try {
         const deletedUser = await userModel.findByIdAndDelete(req.params.id);
-        if (!deletedUser) {                                                                                         //Check for user
+        if (!deletedUser) {                                                                                         
             return res.status(404).json({ message: 'User not found' });
         }
         res.status(200).json({ message: 'User deleted successfully' });
@@ -68,7 +68,7 @@ export const deleteUser = async (req, res) => {
     }
 }
 
-export const logInUser = async (req, res) => {                                                                     //Login function
+export const logInUser = async (req, res) => {                                                                     
     try {
         const { email, password } = req.body;
         const user = await userModel.findOne({ email });

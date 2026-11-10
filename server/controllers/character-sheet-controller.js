@@ -63,12 +63,12 @@ export const createCharacter = async (req, res) => {
     }
 };
 
-export const updateCharacter = async (req, res) => {                   //Will require all fields to be updated
+export const updateCharacter = async (req, res) => {                   
     try {
         const { name, race, experience, level } = req.body;
         const characterClass = req.body.class;
 
-        const updatedCharacter = await Character.findOneAndUpdate(      //findOneAndUpdate is deprecated, returnDocument: 'after' is suggested. Must research
+        const updatedCharacter = await Character.findOneAndUpdate(      
             {
                 _id: req.params.id,                                     //Check userID to CharacterID through JWT Token
                 user: req.user.id
